@@ -1,0 +1,21 @@
+name: Server Health Check
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run health script
+        run: |
+          chmod +x server_health.sh
+          ./server_health.sh
+
+      - name: Report success
+        run: echo "✅ Workflow completed at $(date)"
